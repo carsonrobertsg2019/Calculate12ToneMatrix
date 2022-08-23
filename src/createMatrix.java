@@ -1,6 +1,6 @@
 public class createMatrix
 {
-    private int[] primeMelody;
+    private final int[] primeMelody;
     public createMatrix(int[] primeMelody)
     {
         this.primeMelody = primeMelody;
