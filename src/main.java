@@ -3,9 +3,9 @@ import java.util.Arrays;
 
 public class main
 {
-    public static void checkIfInRange(int numToCheck)
+    public static void checkIfValid(int numToCheck, int i)
     {
-        if(numToCheck < 0 || numToCheck > 11)
+        if((i == 0 && numToCheck != 0) || (numToCheck < 0 || numToCheck > 11))
         {
             throw new RuntimeException();
         }
@@ -36,16 +36,20 @@ public class main
         //array is initialized to 0s, makes hard to determine uniqueness of 0 as input
         Arrays.fill(primeMelody,-1);
 
-        for(int i = 0; i < 12; i++) {
-            try {
+        for(int i = 0; i < 12; i++)
+        {
+            try
+            {
                 //check if input is numeric
                 int in = scanner.nextInt();
                 //check if input is valid number
-                checkIfInRange(in);
+                checkIfValid(in, i);
                 //check if input has been entered before
                 checkUnique(primeMelody, in);
                 primeMelody[i] = in;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 System.out.println("input failure");
                 System.exit(1);
             }
@@ -62,5 +66,9 @@ public class main
             }
             System.out.println();
         }
+
+        System.out.println();
+        convertMatrixToMusic cmtm = new convertMatrixToMusic(matrix);
+        cmtm.printAllMelodies();
     }
 }
