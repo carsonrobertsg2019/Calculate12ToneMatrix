@@ -3,6 +3,44 @@ import java.util.Arrays;
 
 public class main
 {
+    public static int[] start()
+    {
+        System.out.println("This program will help you to create a 12-tone matrix");
+        System.out.println("C will be represented by the number 0. \n" +
+                "All other pitches will be represented by n," +
+                "where 1 ≤ n ≤ 11, n ∈ ℕ, and n represents the note n semitones higher than 0");
+        System.out.println("Now it's time to create the prime melody. Enter 12 individual numbers between 1 and 11.");
+        //user inputs the prime melody, note by note
+        int[] primeMelody = new int[12];
+        //array is initialized to 0s, makes hard to determine uniqueness of 0 as input
+        Arrays.fill(primeMelody,-1);
+        return primeMelody;
+    }
+
+    public static int[] scanInput(int[] primeMelody)
+    {
+        Scanner scanner = new Scanner(System.in);
+        for(int i = 0; i < 12; i++)
+        {
+            try
+            {
+                //check if input is numeric
+                int in = scanner.nextInt();
+                //check if input is valid number
+                checkIfValid(in, i);
+                //check if input has been entered before
+                checkUnique(primeMelody, in);
+                primeMelody[i] = in;
+            }
+            catch (Exception e)
+            {
+                System.out.println("input failure");
+                System.exit(1);
+            }
+        }
+        return primeMelody;
+    }
+
     public static void checkIfValid(int numToCheck, int i)
     {
         if((i == 0 && numToCheck != 0) || (numToCheck < 0 || numToCheck > 11))
@@ -24,36 +62,8 @@ public class main
 
     public static void main(String[] args)
     {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("This program will help you to create a 12-tone matrix");
-        System.out.println("C will be represented by the number 0. \n" +
-                           "All other pitches will be represented by n," +
-                           "where 1 ≤ n ≤ 11, n ∈ ℕ, and n represents the note n semitones higher than 0");
-        System.out.println("Now it's time to create the prime melody. Enter 12 individual numbers between 1 and 11.");
-        //user inputs the prime melody, note by note
-        int[] primeMelody = new int[12];
-        //array is initialized to 0s, makes hard to determine uniqueness of 0 as input
-        Arrays.fill(primeMelody,-1);
-
-        for(int i = 0; i < 12; i++)
-        {
-            try
-            {
-                //check if input is numeric
-                int in = scanner.nextInt();
-                //check if input is valid number
-                checkIfValid(in, i);
-                //check if input has been entered before
-                checkUnique(primeMelody, in);
-                primeMelody[i] = in;
-            }
-            catch (Exception e)
-            {
-                System.out.println("input failure");
-                System.exit(1);
-            }
-        }
+        int[] primeMelody = start();
+        primeMelody = scanInput(primeMelody);
 
         createMatrix cm = new createMatrix(primeMelody);
         int[][] matrix = cm.calculateMatrixFromPrimeMelody();
