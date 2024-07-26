@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Calculate12ToneMatrix:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Calculate12ToneMatrix_jar</output-path>
+    <root id="archive" name="Calculate12ToneMatrix.jar">
+      <element id="module-output" name="Calculate12ToneMatrix" />
+    </root>
+  </artifact>
+</component>
