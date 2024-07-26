@@ -1,9 +1,9 @@
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class main
+public class Main
 {
-    public static int[] start()
+    public static void start()
     {
         System.out.println("This program will help you to create a 12-tone matrix");
         System.out.println("C will be represented by the number 0. \n" +
@@ -11,6 +11,10 @@ public class main
                 "where 1 ≤ n ≤ 11, n ∈ ℕ, and n represents the note n semitones higher than 0");
         System.out.println("Now it's time to create the prime melody. Enter 12 individual numbers between 1 and 11.");
         //user inputs the prime melody, note by note
+    }
+
+    public static int[] createNullMelody()
+    {
         int[] primeMelody = new int[12];
         //array is initialized to 0s, makes hard to determine uniqueness of 0 as input
         Arrays.fill(primeMelody,-1);
@@ -27,7 +31,7 @@ public class main
                 //check if input is numeric
                 int in = scanner.nextInt();
                 //check if input is valid number
-                checkIfValid(in, i);
+                checkIfValid(in);
                 //check if input has been entered before
                 checkUnique(primeMelody, in);
                 primeMelody[i] = in;
@@ -41,9 +45,9 @@ public class main
         return primeMelody;
     }
 
-    public static void checkIfValid(int numToCheck, int i)
+    public static void checkIfValid(int numToCheck)
     {
-        if((i == 0 && numToCheck != 0) || (numToCheck < 0 || numToCheck > 11))
+        if(numToCheck < 0 || numToCheck > 11)
         {
             throw new RuntimeException();
         }
@@ -62,10 +66,11 @@ public class main
 
     public static void main(String[] args)
     {
-        int[] primeMelody = start();
-        primeMelody = scanInput(primeMelody);
+        start();
+        int[] nullMelody = createNullMelody();
+        int[] primeMelody = scanInput(nullMelody);
 
-        createMatrix cm = new createMatrix(primeMelody);
+        CreateMatrix cm = new CreateMatrix(primeMelody);
         int[][] matrix = cm.calculateMatrixFromPrimeMelody();
 
         for(int i = 0; i < 12; i++)
@@ -78,7 +83,7 @@ public class main
         }
 
         System.out.println();
-        convertMatrixToMusic cmtm = new convertMatrixToMusic(matrix);
+        ConvertMatrixToMusic cmtm = new ConvertMatrixToMusic(matrix);
         cmtm.printAllMelodies();
     }
 }
